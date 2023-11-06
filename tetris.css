@@ -1,0 +1,134 @@
+body {
+	background-color: gray;
+	text-align: center;
+	color: white;
+	overflow: hidden;
+}
+
+.side {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.stats {
+	border: 1px solid white;
+	height: 690px;
+	width: 190px;
+	background-color: black;
+	color: white;
+	padding: 5px;
+	margin: 0 10px;
+	font-size: 36px;
+	text-align: center;
+}
+
+.stats > div {
+	margin: 10px;
+	padding: 5px;
+	border: 1px solid #787878;
+}
+
+table {
+	table-layout: fixed;
+	background-color: black;
+	border-collapse: collapse;
+}
+
+
+.statistics > div > div {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.statistics > div {
+	text-align: left;
+}
+
+.statistics > div div:nth-child(2) {
+	width: 50%;
+	text-align: center;
+}
+
+.statistics table {
+	width: 65px;
+	height: 65px;	
+}
+
+.statistics table td {
+	width: 25%;
+	height: 25%;
+}
+
+#board {	
+	width: 350px;
+	height: 700px;
+}
+
+#board td {
+	width: 10%;
+	height: 5%;
+}
+
+#nextBoard {
+	width: 140px;
+	height: 140px;
+}
+
+#nextBoard td {
+	width: 25%;
+	height: 25%;
+}
+
+table td {
+	border: 1px solid black;	
+	font-size: 5px;
+	text-align: left;
+}
+
+.white-square {
+	background-color: #FAFAFA;
+	color: #FFFFFF;
+}
+
+.blue-square {
+	background-color: #00458B;
+	color: #99DDFF;
+}
+
+.green-square {
+	background-color: #12FA12;
+	color: #CCFFCC;
+}
+
+.yellow-square {
+	background-color: #FAFA00;
+	color: #FFFF00;
+}
+
+.red-square {
+	background-color: #FA1212;
+	color: #FFACAC;
+}
+
+.orange-square {
+	background-color: #ffa500;
+	color: #fdd5b1;
+}
+
+.purple-square {
+	background-color: #800080;
+	color: #d8bfd8;
+}
+
+#gameOverText {
+	position: relative;
+    text-align: center;
+    top: -420px;
+    margin: auto;
+    font-size: 65px;
+    color: purple;
+    text-shadow: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue;
+    font-weight: bold;
+    transform: translate(-500px, -500px) rotateX(90deg) rotateY(90deg);
+    transition-duration: 2s;	
+}

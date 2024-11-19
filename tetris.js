@@ -1,11 +1,12 @@
 var g_board, g_width = 10, g_height = 20, g_tetromino, g_shape, g_speed = 500, g_lastMoveTime, g_lastDropTime,
 	g_colors, g_movement, g_levelSpeed, g_fastFallingSpeed, g_movementSpeed, g_isRunning, g_next, g_nextBoard,
-	g_score, g_lines, g_level, g_shapeCounts;
+	g_score, g_lines, g_level, g_shapeCounts, g_lastRotateTime;
 
 g_isRunning = false;
 g_movementSpeed = 125;
 g_fastFallingSpeed = 25;
 g_levelSpeed = 500;
+g_rotateSpeed = 300;
 g_movement = "";
 g_colors = [
 	"white", "green", "blue", "yellow", "red", "orange", "purple"
@@ -69,8 +70,6 @@ window.onload = function () {
 };
 
 window.onkeydown = function (e) {
-	//console.log(e.keyCode);
-	
 	if(e.keyCode === 37) {
 		g_movement = "left";		
 	} else if(e.keyCode === 39) {
@@ -82,18 +81,18 @@ window.onkeydown = function (e) {
 	} else {
 		g_movement = "";
 	}
-	//console.log(g_movement);
-	g_lastMoveTime = 0;
 };
 
 window.onkeyup = function (e) {
 	g_movement = "";
 	g_lastMoveTime = 0;
+	g_lastRotateTime = 0;
 };
 
 window.onblur = function (e) {
 	g_movement = "";
 	g_lastMoveTime = 0;
+	g_lastRotateTime = 0;
 };
 
 function initBoard(board, width, height) {
@@ -113,7 +112,7 @@ function initBoard(board, width, height) {
 	}
 }
 
-function startGame() {	
+function startGame() {
 	g_score = 0;
 	g_lines = 0;
 	g_level = 1;
@@ -123,6 +122,7 @@ function startGame() {
 	getNextPiece();
 	g_lastDropTime = new Date().getTime();
 	g_lastMoveTime = g_lastDropTime;
+	g_lastRotateTime = g_lastDropTime;
 	g_isRunning = true;
 	run();
 }
@@ -175,9 +175,9 @@ function run() {
 
 function handleMovement(t) {
 	if(t >= g_lastMoveTime + g_movementSpeed) {
-		g_speed = g_levelSpeed;		
+		g_speed = g_levelSpeed;
 		
-		// Check for movement
+		// Handle movement
 		switch(g_movement) {
 			case "left":
 				g_tetromino.col -= 1;
@@ -195,15 +195,6 @@ function handleMovement(t) {
 					g_lastMoveTime = t;
 				}
 				break;
-			case "up":
-				var oldShape = g_tetromino.shape;
-				g_tetromino.shape = rotateShape(g_tetromino.shape);
-				if(isShapeCollided()) {
-					g_tetromino.shape = oldShape;
-				} else {
-					g_lastMoveTime = t;
-				}
-				break;
 			case "down":
 				g_speed = g_fastFallingSpeed;
 				g_lastMoveTime = t;
@@ -212,6 +203,20 @@ function handleMovement(t) {
 		
 		drawShape(g_board, g_tetromino);
 	}
+
+	// Handle Rotation
+	if(t >= g_lastRotateTime + g_rotateSpeed) {
+		if(g_movement === "up") {
+			var oldShape = g_tetromino.shape;
+			g_tetromino.shape = rotateShape(g_tetromino.shape);
+			if(isShapeCollided()) {
+				g_tetromino.shape = oldShape;
+			} else {
+				g_lastRotateTime = t;
+			}
+		}
+	}
+
 }
 
 function handleFalling(t) {

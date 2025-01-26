@@ -2,6 +2,10 @@
 
 A **simple Tetris game** implemented using **Vanilla JavaScript, HTML, and CSS**. This project brings the classic Tetris gameplay to your browser, offering a fun and nostalgic experience with clean and responsive design.
 
+## View it Online
+You can play Tetris by visiting the following link:
+[Tetris](https://www.andyswebgames.com/games/tetris/)
+
 ## Features
 - Classic Tetris mechanics.
 - Intuitive keyboard controls for gameplay.
